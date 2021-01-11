@@ -31,19 +31,19 @@ let tablero = [
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 2, 4, 0, 0, 5, 5, 0, 1],
+  [1, 0, 0, 0, 2, 2, 2, 0, 5, 0, 0, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
-let rojo = '#FF0000';
-let morado = '#800080';
-let naranja = '#FF8C00';
-let amarillo = '#FFD700';
-let verde = '#008000';
-let cyan = '#00CED1';
-let azul = '#0000CD';
+let rojo = "#FF0000";
+let morado = "#800080";
+let naranja = "#FF8C00";
+let amarillo = "#FFD700";
+let verde = "#008000";
+let cyan = "#00CED1";
+let azul = "#0000CD";
 
 let fichaGrafico = [
   [
@@ -237,91 +237,124 @@ let objPieza = function () {
   this.y = 1;
 
   this.angulo = 0;
-  this.tipo = 6;
+  this.tipo = 0;
+
+  this.retraso = 50;
+  this.fotograma = 0;
+
+  this.nueva = function () {
+    this.tipo = Math.floor(Math.random() * 7);
+    this.y = 5;
+    this.x = 4;
+  };
+
+  this.caer = function () {
+    if (this.fotograma < this.retraso) {
+      this.fotograma++;
+    } else {
+      this.y++;
+      this.fotograma = 0;
+    }
+  };
 
   this.dibujo = function () {
-      for (let py = 0; py < 4; py++) {
-          for (let px = 0; px < 4; px++) {
-              if (fichaGrafico[this.tipo][this.angulo][py][px] != 0) {
-                
-                if(fichaGrafico[this.tipo][this.angulo][py][px] == 1 ) {
-                    ctx.fillStyle = rojo;
-                }
-                if(fichaGrafico[this.tipo][this.angulo][py][px] == 2 ) {
-                    ctx.fillStyle = naranja;
-                }
-                if(fichaGrafico[this.tipo][this.angulo][py][px] == 3 ) {
-                    ctx.fillStyle = amarillo;
-                }
-                if(fichaGrafico[this.tipo][this.angulo][py][px] == 4 ) {
-                    ctx.fillStyle = verde;
-                }
-                if(fichaGrafico[this.tipo][this.angulo][py][px] == 5 ) {
-                    ctx.fillStyle = cyan;
-                }
-                if(fichaGrafico[this.tipo][this.angulo][py][px] == 6 ) {
-                    ctx.fillStyle = azul;
-                }
-                if(fichaGrafico[this.tipo][this.angulo][py][px] == 7 ) {
-                    ctx.fillStyle = morado;
-                }
-                  ctx.fillRect((this.x + px)*anchoF, (this.y + py)*altoF, anchoF, altoF);
-                
-              }
+    for (let py = 0; py < 4; py++) {
+      for (let px = 0; px < 4; px++) {
+        if (fichaGrafico[this.tipo][this.angulo][py][px] != 0) {
+          if (fichaGrafico[this.tipo][this.angulo][py][px] == 1) {
+            ctx.fillStyle = rojo;
           }
+          if (fichaGrafico[this.tipo][this.angulo][py][px] == 2) {
+            ctx.fillStyle = naranja;
+          }
+          if (fichaGrafico[this.tipo][this.angulo][py][px] == 3) {
+            ctx.fillStyle = amarillo;
+          }
+          if (fichaGrafico[this.tipo][this.angulo][py][px] == 4) {
+            ctx.fillStyle = verde;
+          }
+          if (fichaGrafico[this.tipo][this.angulo][py][px] == 5) {
+            ctx.fillStyle = cyan;
+          }
+          if (fichaGrafico[this.tipo][this.angulo][py][px] == 6) {
+            ctx.fillStyle = azul;
+          }
+          if (fichaGrafico[this.tipo][this.angulo][py][px] == 7) {
+            ctx.fillStyle = morado;
+          }
+          ctx.fillRect(
+            (this.x + px - 1) * anchoF,
+            (this.y + py - margenSuperior) * altoF,
+            anchoF,
+            altoF
+          );
+        }
       }
+    }
   };
 
   //   console.log("pieza creada");
 
   this.rotar = function () {
+    if (this.angulo < 3) {
+      this.angulo++;
+    } else {
+      this.angulo = 0;
+    }
     console.log("rotar");
   };
   this.abajo = function () {
+      this.y++;
     console.log("abajo");
   };
   this.derecha = function () {
+      this.x++;
     console.log("der");
   };
   this.izquierda = function () {
+      this.x--;
     console.log("izq");
   };
+
+  this.nueva();
 };
 
 inicializa();
 
-
 function dibujaTablero() {
-    for (let py = margenSuperior; py < altoTablero; py++) {
-        for (let px = 1; px < anchoTablero; px++) {
-            if (tablero[py][px] != 0) {
-              
-              if(tablero[py][px] == 1 ) {
-                  ctx.fillStyle = rojo;
-              }
-              if(tablero[py][px] == 2 ) {
-                  ctx.fillStyle = naranja;
-              }
-              if(tablero[py][px] == 3 ) {
-                  ctx.fillStyle = amarillo;
-              }
-              if(tablero[py][px] == 4 ) {
-                  ctx.fillStyle = verde;
-              }
-              if(tablero[py][px] == 5 ) {
-                  ctx.fillStyle = cyan;
-              }
-              if(tablero[py][px] == 6 ) {
-                  ctx.fillStyle = azul;
-              }
-              if(tablero[py][px] == 7 ) {
-                  ctx.fillStyle = morado;
-              }
-                ctx.fillRect( (px-1)*anchoF, (py-margenSuperior)*altoF, anchoF, altoF);
-              
-            }
+  for (let py = margenSuperior; py < altoTablero; py++) {
+    for (let px = 1; px < anchoTablero; px++) {
+      if (tablero[py][px] != 0) {
+        if (tablero[py][px] == 1) {
+          ctx.fillStyle = rojo;
         }
+        if (tablero[py][px] == 2) {
+          ctx.fillStyle = naranja;
+        }
+        if (tablero[py][px] == 3) {
+          ctx.fillStyle = amarillo;
+        }
+        if (tablero[py][px] == 4) {
+          ctx.fillStyle = verde;
+        }
+        if (tablero[py][px] == 5) {
+          ctx.fillStyle = cyan;
+        }
+        if (tablero[py][px] == 6) {
+          ctx.fillStyle = azul;
+        }
+        if (tablero[py][px] == 7) {
+          ctx.fillStyle = morado;
+        }
+        ctx.fillRect(
+          (px - 1) * anchoF,
+          (py - margenSuperior) * altoF,
+          anchoF,
+          altoF
+        );
+      }
     }
+  }
 }
 function inicializarTeclado() {
   document.addEventListener("keydown", (tecla) => {
@@ -365,6 +398,7 @@ function inicializa() {
 function principal() {
   borraCanvas();
   dibujaTablero();
+  pieza.caer();
   pieza.dibujo();
 }
 
