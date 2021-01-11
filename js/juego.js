@@ -9,7 +9,7 @@ let anchoTablero = 10;
 let altoTablero = 16;
 
 let anchoF = 40;
-let antoF = 40;
+let altoF = 40;
 
 //12x17 (10x16)
 let tablero = [
@@ -32,13 +32,226 @@ let tablero = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
+let fichaGrafico = [
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 0, 0],
+      [0, 1, 1, 0],
+      [0, 1, 1, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+  [
+    [
+      [0, 0, 0, 0],
+      [2, 2, 2, 2],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+    ],
+    [
+      [0, 0, 0, 0],
+      [2, 2, 2, 2],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+      [0, 0, 2, 0],
+    ],
+  ],
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 0, 3, 3],
+      [0, 3, 3, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 3, 0],
+      [0, 0, 3, 3],
+      [0, 0, 0, 3],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 0, 0],
+      [0, 0, 3, 3],
+      [0, 3, 3, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 3, 0],
+      [0, 0, 3, 3],
+      [0, 0, 0, 3],
+      [0, 0, 0, 0],
+    ],
+  ],
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 4, 4, 0],
+      [0, 0, 4, 4],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 0, 4],
+      [0, 0, 4, 4],
+      [0, 0, 4, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 0, 0],
+      [0, 4, 4, 0],
+      [0, 0, 4, 4],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 0, 4],
+      [0, 0, 4, 4],
+      [0, 0, 4, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 5, 5, 5],
+      [0, 5, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 5, 0],
+      [0, 0, 5, 0],
+      [0, 0, 5, 5],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 0, 5],
+      [0, 5, 5, 5],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 5, 5, 0],
+      [0, 0, 5, 0],
+      [0, 0, 5, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 6, 6, 6],
+      [0, 0, 0, 6],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 6, 6],
+      [0, 0, 6, 0],
+      [0, 0, 6, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 6, 0, 0],
+      [0, 6, 6, 6],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 6, 0],
+      [0, 0, 6, 0],
+      [0, 6, 6, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+  [
+    [
+      [0, 0, 0, 0],
+      [0, 7, 7, 7],
+      [0, 0, 7, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 7, 0],
+      [0, 0, 7, 7],
+      [0, 0, 7, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 7, 0],
+      [0, 7, 7, 7],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    [
+      [0, 0, 7, 0],
+      [0, 7, 7, 0],
+      [0, 0, 7, 0],
+      [0, 0, 0, 0],
+    ],
+  ],
+];
+
 let pieza;
 
 let objPieza = function () {
-  this.x = 0;
-  this.y = 0;
+  this.x = 1;
+  this.y = 1;
 
-  console.log("pieza creada");
+  this.angulo = 0;
+  this.tipo = 2;
+
+  this.dibujo = function () {
+      for (let py = 0; py < 4; py++) {
+          for (let px = 0; px < 4; px++) {
+              if (fichaGrafico[this.tipo][this.angulo][py][px] != 0) {
+                  ctx.fillStyle = '#777777';
+                  ctx.fillRect((this.x + px)*anchoF, (this.y + py)*altoF, anchoF, altoF);
+                
+              }
+          }
+      }
+  };
+
+  //   console.log("pieza creada");
+
+  this.rotar = function () {
+    console.log("rotar");
+  };
+  this.abajo = function () {
+    console.log("abajo");
+  };
+  this.derecha = function () {
+    console.log("der");
+  };
+  this.izquierda = function () {
+    console.log("izq");
+  };
 };
 
 inicializa();
@@ -49,23 +262,19 @@ function inicializarTeclado() {
     // p.textContent = `KeyboardEvent: key='${tecla.key}' | code='${tecla.code}'`;
 
     if (tecla.code === "ArrowUp") {
-      //   protagonista.arriba();
-      console.log("arriba");
+      pieza.rotar();
     }
 
     if (tecla.code === "ArrowDown") {
-      //   protagonista.abajo();
-      console.log("abajo");
+      pieza.abajo();
     }
 
     if (tecla.code === "ArrowLeft") {
-      //   protagonista.izquierda();
-      console.log("izq");
+      pieza.izquierda();
     }
 
     if (tecla.code === "ArrowRight") {
-      //   protagonista.derecha();
-      console.log("der");
+      pieza.derecha();
     }
   });
 }
@@ -88,6 +297,7 @@ function inicializa() {
 
 function principal() {
   borraCanvas();
+  pieza.dibujo();
 }
 
 function borraCanvas() {
