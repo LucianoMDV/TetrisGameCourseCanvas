@@ -31,11 +31,35 @@ let tablero = [
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 2, 4, 0, 0, 5, 5, 0, 1],
-  [1, 0, 0, 0, 2, 2, 2, 0, 5, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
+
+let tableroCopia = [
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  ];
 
 let rojo = "#FF0000";
 let morado = "#800080";
@@ -230,6 +254,16 @@ let fichaGrafico = [
   ],
 ];
 
+function reseteaTablero() {
+    console.log('reset');
+
+    for (let py = 0; py < 21; py++) {
+        for (let px = 0; px < 12; px++) {
+            tablero[py][px]=tableroCopia[py][px];
+        }
+    }
+}
+
 let pieza;
 
 let objPieza = function () {
@@ -248,29 +282,63 @@ let objPieza = function () {
     this.x = 4;
   };
 
+  this.compruebaSiPierde = function () {
+    let pierde = false;
+    for (let px = 1; px < anchoTablero; px++) {
+        if(tablero[2][px]) {
+            pierde = true;
+        }
+    }
+    return pierde;
+  };
+
+  this.limpia = function () {
+    let filaCompleta;
+
+    for (let py = 0; py < altoTablero; py++) {
+        filaCompleta = true;
+
+        for (let px = 1; px < anchoTablero+1; px++) {
+            if(tablero[py][px]==0) {
+                filaCompleta = false;
+            }
+        }        
+        if(filaCompleta == true) {
+            for (let px = 1; px < anchoTablero+1; px++) {
+                tablero[py][px]=0;
+            } 
+        }
+    }
+  };
+
   this.caer = function () {
     if (this.fotograma < this.retraso) {
       this.fotograma++;
     } else {
-      if (this.colision(this.angulo, this.y+1, this.x) == false) {
+      if (this.colision(this.angulo, this.y + 1, this.x) == false) {
         this.y++;
         this.fotograma = 0;
       } else {
-          this.fijar();
-          this.nueva();
+        this.fijar();
+        this.limpia();
+        this.nueva();
+        if (this.compruebaSiPierde()==true) {
+            reseteaTablero();
+        }
       }
-      this.fotograma =0;
+      this.fotograma = 0;
     }
   };
 
   this.fijar = function () {
     for (let py = 0; py < 4; py++) {
-        for (let px = 0; px < 4; px++) {
-            if(fichaGrafico[this.tipo][this.angulo][py][px]>0) {
-                tablero[this.y+py][this.x+px] = fichaGrafico[this.tipo][this.angulo][py][px];
-            }
+      for (let px = 0; px < 4; px++) {
+        if (fichaGrafico[this.tipo][this.angulo][py][px] > 0) {
+          tablero[this.y + py][this.x + px] =
+            fichaGrafico[this.tipo][this.angulo][py][px];
         }
-    }  
+      }
+    }
   };
 
   this.colision = function (anguloNuevo, yNueva, xNuevo) {
@@ -367,7 +435,7 @@ inicializa();
 
 function dibujaTablero() {
   for (let py = margenSuperior; py < altoTablero; py++) {
-    for (let px = 1; px < anchoTablero+1; px++) {
+    for (let px = 1; px < anchoTablero + 1; px++) {
       if (tablero[py][px] != 0) {
         if (tablero[py][px] == 1) {
           ctx.fillStyle = rojo;
