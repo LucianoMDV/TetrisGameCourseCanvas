@@ -244,7 +244,7 @@ let objPieza = function () {
 
   this.nueva = function () {
     this.tipo = Math.floor(Math.random() * 7);
-    this.y = 5;
+    this.y = 0;
     this.x = 4;
   };
 
@@ -252,9 +252,39 @@ let objPieza = function () {
     if (this.fotograma < this.retraso) {
       this.fotograma++;
     } else {
-      this.y++;
-      this.fotograma = 0;
+      if (this.colision(this.angulo, this.y+1, this.x) == false) {
+        this.y++;
+        this.fotograma = 0;
+      } else {
+          this.fijar();
+          this.nueva();
+      }
+      this.fotograma =0;
     }
+  };
+
+  this.fijar = function () {
+    for (let py = 0; py < 4; py++) {
+        for (let px = 0; px < 4; px++) {
+            if(fichaGrafico[this.tipo][this.angulo][py][px]>0) {
+                tablero[this.y+py][this.x+px] = fichaGrafico[this.tipo][this.angulo][py][px];
+            }
+        }
+    }  
+  };
+
+  this.colision = function (anguloNuevo, yNueva, xNuevo) {
+    let resultado = false;
+    for (let py = 0; py < 4; py++) {
+      for (let px = 0; px < 4; px++) {
+        if (fichaGrafico[this.tipo][anguloNuevo][py][px]) {
+          if (tablero[yNueva + py][xNuevo + px] > 0) {
+            resultado = true;
+          }
+        }
+      }
+    }
+    return resultado;
   };
 
   this.dibujo = function () {
@@ -296,24 +326,38 @@ let objPieza = function () {
   //   console.log("pieza creada");
 
   this.rotar = function () {
-    if (this.angulo < 3) {
-      this.angulo++;
+    let anguloNuevo = this.angulo;
+
+    if (anguloNuevo < 3) {
+      anguloNuevo++;
     } else {
-      this.angulo = 0;
+      anguloNuevo = 0;
     }
+
+    if (this.colision(anguloNuevo, this.y, this.x) == false) {
+      this.angulo = anguloNuevo;
+    }
+
     console.log("rotar");
   };
+
   this.abajo = function () {
+    if (this.colision(this.angulo, this.y + 1, this.x) == false) {
       this.y++;
-    console.log("abajo");
+      console.log("abajo");
+    }
   };
   this.derecha = function () {
+    if (this.colision(this.angulo, this.y, this.x + 1) == false) {
       this.x++;
-    console.log("der");
+      console.log("der");
+    }
   };
   this.izquierda = function () {
+    if (this.colision(this.angulo, this.y, this.x - 1) == false) {
       this.x--;
-    console.log("izq");
+      console.log("izq");
+    }
   };
 
   this.nueva();
@@ -323,7 +367,7 @@ inicializa();
 
 function dibujaTablero() {
   for (let py = margenSuperior; py < altoTablero; py++) {
-    for (let px = 1; px < anchoTablero; px++) {
+    for (let px = 1; px < anchoTablero+1; px++) {
       if (tablero[py][px] != 0) {
         if (tablero[py][px] == 1) {
           ctx.fillStyle = rojo;
