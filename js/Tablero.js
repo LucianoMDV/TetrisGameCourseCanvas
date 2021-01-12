@@ -1,11 +1,21 @@
-class Tablero {
-  constructor(fila, columna) {
+class Tablero extends Color {
+  constructor(fila, columna, ctx) {
+    super();
     this.fila = fila;
     this.columna = columna;
+    this.ctx = ctx;
     this.arrayFila = [];
     this.generarArray();
     this.tableroMatriz = new Array(this.fila);
     crearMatriz(this.tableroMatriz, this.columna);
+  }
+
+  get getFila() {
+    return this.fila;
+  }
+
+  get getColumna() {
+    return this.columna;
   }
 
   getTablero() {
@@ -18,32 +28,32 @@ class Tablero {
     }
   }
 
-  dibujaTablero() {
-    for (let py = margenSuperior; py < altoTablero; py++) {
-      for (let px = 1; px < anchoTablero + 1; px++) {
+  dibujaTablero(margenSuperior, anchoF, altoF) {
+    for (let py = margenSuperior; py < this.fila; py++) {
+      for (let px = 1; px < this.columna + 1; px++) {
         if (this.tableroMatriz[py][px] != 0) {
           if (this.tableroMatriz[py][px] == 1) {
-            ctx.fillStyle = rojo;
+            this.ctx.fillStyle = this.colors.rojo;
           }
           if (this.tableroMatriz[py][px] == 2) {
-            ctx.fillStyle = naranja;
+            this.ctx.fillStyle = this.colors.naranja;
           }
           if (this.tableroMatriz[py][px] == 3) {
-            ctx.fillStyle = amarillo;
+            this.ctx.fillStyle = this.colors.amarillo;
           }
           if (this.tableroMatriz[py][px] == 4) {
-            ctx.fillStyle = verde;
+            this.ctx.fillStyle = this.colors.verde;
           }
           if (this.tableroMatriz[py][px] == 5) {
-            ctx.fillStyle = cyan;
+            this.ctx.fillStyle = this.colors.cyan;
           }
           if (this.tableroMatriz[py][px] == 6) {
-            ctx.fillStyle = azul;
+            this.ctx.fillStyle = this.colors.azul;
           }
           if (this.tableroMatriz[py][px] == 7) {
-            ctx.fillStyle = morado;
+            this.ctx.fillStyle = this.colors.morado;
           }
-          ctx.fillRect(
+          this.ctx.fillRect(
             (px - 1) * anchoF,
             (py - margenSuperior) * altoF,
             anchoF,
