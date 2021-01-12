@@ -1,4 +1,5 @@
 window.onload = function () {
+  guardarDatos(0);
   let canvas;
   let ctx;
   const FPS = 50;
@@ -34,7 +35,7 @@ window.onload = function () {
 
     tablero = new Tablero(altoTablero, anchoTablero, ctx);
 
-    const cubo = new Cubo();
+    const cubo = new Cubo(20);
     const rectangulo = new Rectangulo();
     const figuraL = new FiguraL();
     const figuraL2 = new FiguraL2();
@@ -43,13 +44,13 @@ window.onload = function () {
     const figuraS = new FiguraS();
 
     let fichaGrafico = [
-      cubo.getforma,
-      rectangulo.getforma,
-      figuraL.getforma,
-      figuraL2.getforma,
-      figuraS2.getforma,
-      figuraT.getforma,
-      figuraS.getforma,
+      cubo.getForma,
+      rectangulo.getForma,
+      figuraL.getForma,
+      figuraL2.getForma,
+      figuraS2.getForma,
+      figuraT.getForma,
+      figuraS.getForma,
     ];
 
     pieza = new Pieza(fichaGrafico, ctx, tablero);
@@ -139,5 +140,18 @@ window.onload = function () {
     canvas.height = parseInt(
       window.getComputedStyle(canvas, null).getPropertyValue("height")
     );
+  }
+
+  function guardarDatos(valor) {
+    localStorage.setItem("nombre_jugador", valor);
+    console.log('guardo datos');
+  }
+
+  function cargarDatos() {
+    return(localStorage.getItem("nombre_jugador"));
+  }
+
+  function borrarDatos() {
+    localStorage.removeItem("nombre_jugador");
   }
 };

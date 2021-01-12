@@ -33,9 +33,10 @@ class Pieza extends Color {
       if (tableroCopy[2][px] != 0) {
         // console.table(tableroCopy);
         pierde = true;
+        guardarDatos(0);
       }
     }
-    console.log(pierde);
+    // console.log(pierde);
     return pierde;
   }
 
@@ -45,6 +46,9 @@ class Pieza extends Color {
 
     let altoTablero = this.tablero.getFila;
     let anchoTablero = this.tablero.getColumna;
+
+    let sumarPuntos = false;
+    let puntosDeLinea = cargarDatos();
 
     for (let py = 0; py < altoTablero - 1; py++) {
       filaCompleta = true;
@@ -57,12 +61,20 @@ class Pieza extends Color {
       }
       if (filaCompleta == true) {
         // debugger;
-        for (let px = 1; px < anchoTablero + 1; px++) {
+        for (let px = 1; px < anchoTablero - 1; px++) {
+          // debugger;
+
+          puntosDeLinea += tableroCopy[py][px];
           tableroCopy[py][px] = 0;
         }
         this.bajarLineas(tableroCopy, py, anchoTablero);
+        sumarPuntos = true;
+        guardarDatos(puntosDeLinea);
+      } else {
+        sumarPuntos = false;
       }
     }
+    return sumarPuntos;
   }
 
   bajarLineas(tableroCopy, iniPy, anchoTablero) {
@@ -85,7 +97,12 @@ class Pieza extends Color {
         this.fotograma = 0;
       } else {
         this.fijar();
-        this.limpia();
+        let sumarPuntos = this.limpia();
+        // if (sumarPuntos == true) {
+        //   //ACA
+        //   let score = document.querySelector('#score');
+        //   score.children[0].innerHTML = cargarDatos();
+        // }
         this.nueva();
         if (this.compruebaSiPierde(this.tablero) == true) {
           this.tablero.reseteaTablero();
@@ -174,27 +191,42 @@ class Pieza extends Color {
       this.angulo = anguloNuevo;
     }
 
-    console.log("rotar");
+    // console.log("rotar");
   }
 
   abajo() {
     if (this.colision(this.angulo, this.y + 1, this.x) == false) {
       this.y++;
-      console.log("abajo");
+      // console.log("abajo");
     }
   }
 
   derecha() {
     if (this.colision(this.angulo, this.y, this.x + 1) == false) {
       this.x++;
-      console.log("der");
+      // console.log("der");
     }
   }
 
   izquierda() {
     if (this.colision(this.angulo, this.y, this.x - 1) == false) {
       this.x--;
-      console.log("izq");
+      // console.log("izq");
     }
   }
+}
+
+function guardarDatos(valor) {
+  // debugger;
+  localStorage.setItem("nombre_jugador", valor);
+  console.log("guardo datos: " + valor);
+
+  let score = document.querySelector("#score");
+  debugger;
+  score.children[0].innerHTML = cargarDatos();
+}
+function cargarDatos() {
+  // debugger;
+  let valor = parseInt(localStorage.getItem("nombre_jugador"));
+  return valor;
 }

@@ -1,5 +1,5 @@
 class Cubo extends Figura {
-  constructor() {
+  constructor(puntos) {
     super();
     this.forma = [
       [
@@ -27,5 +27,6 @@ class Cubo extends Figura {
         [0, 0, 0, 0],
       ],
     ];
+    this.puntos = puntos;
   }
 }

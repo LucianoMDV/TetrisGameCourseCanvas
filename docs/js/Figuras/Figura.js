@@ -1,9 +1,14 @@
 class Figura {
-    constructor(forma) {
+    constructor(forma, puntos) {
         this.forma = forma;
+        this.puntos = puntos;
     }
 
-    get getforma() {
-        return this.forma;;
+    get getForma() {
+        return this.forma;
+    }
+
+    get getPuntos() {
+        return this.puntos;
     }
 }

@@ -62,3 +62,7 @@ button.skeuomorph-flat.active {
     justify-content: center;
     align-items: center;
 }
+#score {
+    position: absolute;
+}
+
