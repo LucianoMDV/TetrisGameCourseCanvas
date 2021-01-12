@@ -16,9 +16,10 @@ window.onload = function () {
 
   let tablero;
   let pieza;
-  
+
   let sonido2 = new Howl({
     src: ["sound/efecto2.wav"],
+    volume: 0.3,
     loop: false,
   });
 
@@ -50,7 +51,7 @@ window.onload = function () {
       figuraT.getforma,
       figuraS.getforma,
     ];
-    
+
     pieza = new Pieza(fichaGrafico, ctx, tablero);
 
     inicializarTeclado();
@@ -62,34 +63,54 @@ window.onload = function () {
 
   function principal() {
     borraCanvas();
-    tablero.dibujaTablero(margenSuperior, ctx, anchoF, altoF);
+    tablero.dibujaTablero(margenSuperior, anchoF, altoF);
     pieza.caer();
     pieza.dibujo(margenSuperior, anchoF, altoF);
   }
 
   function inicializarTeclado() {
-    document.addEventListener("keydown", (tecla) => {
+    let sueltaTecla = true;
+    document.addEventListener("keyup", (tecla) => {
+      if (tecla.code === "ArrowUp") {
+        sueltaTecla = true;
+      }
+      if (tecla.code === "ArrowDown") {
+        sueltaTecla = true;
+      }
+      if (tecla.code === "ArrowLeft") {
+        sueltaTecla = true;
+      }
+      if (tecla.code === "ArrowRight") {
+        sueltaTecla = true;
+      }
+    });
+    document.addEventListener("keydown", function apretarTecla(tecla) {
       // let p = document.createElement("p");
       // p.textContent = `KeyboardEvent: key='${tecla.key}' | code='${tecla.code}'`;
+      if (sueltaTecla == true) {
+        if (tecla.code === "ArrowUp") {
+          pieza.rotar();
+          sonido2.play();
+          sueltaTecla = false;
+        }
 
-      if (tecla.code === "ArrowUp") {
-        pieza.rotar();
-        sonido2.play();
-      }
-
-      if (tecla.code === "ArrowDown") {
-        pieza.abajo();
-        sonido2.play();
-      }
-
-      if (tecla.code === "ArrowLeft") {
-        pieza.izquierda();
-        sonido2.play();
-      }
-
-      if (tecla.code === "ArrowRight") {
-        pieza.derecha();
-        sonido2.play();
+        if (tecla.code === "ArrowDown") {
+          pieza.abajo();
+          sonido2.play();
+          sueltaTecla = false;
+        }
+        
+        if (tecla.code === "ArrowLeft") {
+          pieza.izquierda();
+          sonido2.play();
+          sueltaTecla = false;
+        }
+        
+        if (tecla.code === "ArrowRight") {
+          pieza.derecha();
+          sonido2.play();
+          sueltaTecla = false;
+        }
       }
     });
   }

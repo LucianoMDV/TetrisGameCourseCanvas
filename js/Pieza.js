@@ -85,10 +85,12 @@ class Pieza extends Color {
   }
 
   fijar() {
+    let tableroCopy;
     for (let py = 0; py < 4; py++) {
       for (let px = 0; px < 4; px++) {
         if (this.fichaGrafico[this.tipo][this.angulo][py][px] > 0) {
-          this.tablero.getTablero()[this.y + py][this.x + px] =
+          tableroCopy = this.tablero.getTablero();
+          tableroCopy[this.y + py][this.x + px] =
             this.fichaGrafico[this.tipo][this.angulo][py][px];
         }
       }
