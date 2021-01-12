@@ -25,13 +25,13 @@ class Pieza extends Color {
   compruebaSiPierde() {
     let pierde = false;
     let tableroCopy;
-    
+
     let anchoTablero = this.tablero.getColumna;
 
     for (let px = 1; px < anchoTablero - 1; px++) {
       tableroCopy = this.tablero.getTablero();
       if (tableroCopy[2][px] != 0) {
-        console.table(tableroCopy);
+        // console.table(tableroCopy);
         pierde = true;
       }
     }
@@ -56,11 +56,22 @@ class Pieza extends Color {
         }
       }
       if (filaCompleta == true) {
+        // debugger;
         for (let px = 1; px < anchoTablero + 1; px++) {
           tableroCopy[py][px] = 0;
         }
+        this.bajarLineas(tableroCopy, py, anchoTablero);
       }
     }
+  }
+
+  bajarLineas(tableroCopy, iniPy, anchoTablero) {
+    for (let py = iniPy; py > 0; py--) {
+      for (let px = 1; px < anchoTablero + 1; px++) {
+        tableroCopy[py][px] = tableroCopy[py - 1][px];
+      }
+    }
+    console.table(tableroCopy);
   }
 
   caer() {
@@ -90,8 +101,9 @@ class Pieza extends Color {
       for (let px = 0; px < 4; px++) {
         if (this.fichaGrafico[this.tipo][this.angulo][py][px] > 0) {
           tableroCopy = this.tablero.getTablero();
-          tableroCopy[this.y + py][this.x + px] =
-            this.fichaGrafico[this.tipo][this.angulo][py][px];
+          tableroCopy[this.y + py][this.x + px] = this.fichaGrafico[this.tipo][
+            this.angulo
+          ][py][px];
         }
       }
     }
@@ -113,10 +125,9 @@ class Pieza extends Color {
     return resultado;
   }
 
-  dibujo(margenSuperior,anchoF, altoF) {
+  dibujo(margenSuperior, anchoF, altoF) {
     for (let py = 0; py < 4; py++) {
       for (let px = 0; px < 4; px++) {
-        
         if (this.fichaGrafico[this.tipo][this.angulo][py][px] != 0) {
           if (this.fichaGrafico[this.tipo][this.angulo][py][px] == 1) {
             this.ctx.fillStyle = this.colors.rojo;
