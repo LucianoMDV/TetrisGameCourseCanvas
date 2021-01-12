@@ -113,6 +113,11 @@ window.onload = function () {
         }
       }
     });
+    
+    document.querySelector('#rotar').addEventListener('click', (tecla) =>{
+      pieza.rotar();
+      sonido2.play();
+    });
   }
 
   function borraCanvas() {
