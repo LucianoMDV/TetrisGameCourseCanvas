@@ -7,11 +7,27 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <canvas id="canvas"></canvas>
-    <button type="button" id="rotar">Rotar</button>
-    <button type="button" id="Izq">Izq</button>
-    <button type="button" id="Der">Der</button>
-    <button type="button" id="abajo">Abajo</button>
+    <div class="container_canvas">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div class="container_buttons">
+      <div class="container_rotar">
+        <button type="button" class="skeuomorph-flat" id="rotar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/></svg>
+        </button>
+      </div>
+      <div class="container_resto">
+        <button type="button" class="skeuomorph-flat" id="izq">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+        </button>
+        <button type="button" class="skeuomorph-flat" id="der">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </button>
+        <button type="button" class="skeuomorph-flat" id="abajo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </button>
+      </div>
+    </div>
     <script src='js/howler.core.js'></script>
     
     <script src="js/Figuras/Figura.js"></script>

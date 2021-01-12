@@ -118,6 +118,18 @@ window.onload = function () {
       pieza.rotar();
       sonido2.play();
     });
+    document.querySelector('#izq').addEventListener('click', (tecla) =>{
+      pieza.izquierda();
+      sonido2.play();
+    });
+    document.querySelector('#der').addEventListener('click', (tecla) =>{
+      pieza.derecha();
+      sonido2.play();
+    });
+    document.querySelector('#abajo').addEventListener('click', (tecla) =>{
+      pieza.abajo();
+      sonido2.play();
+    });
   }
 
   function borraCanvas() {

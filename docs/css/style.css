@@ -3,3 +3,62 @@
     height: 500px;
     border:2px solid #000000;
 }
+
+button.skeuomorph-flat {
+    outline: none;
+    margin: 0;
+    border: 0;
+    border-radius: .25em;
+    background: #FFFFFF;
+    cursor: pointer;
+    padding: 1.5em 2.5em;
+    text-rendering: optimizeLegibility;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: 300;
+    color: inherit;
+    box-shadow: 0 .2em #888;
+    -webkit-transform: translateY(-.2em);
+    -moz-transform: translateY(-.2em);
+    transform: translateY(-.2em)
+}
+
+button.skeuomorph-flat:hover,
+button.skeuomorph-flat.hover {
+    background: #e6e6e6
+}
+
+button.skeuomorph-flat:active,
+button.skeuomorph-flat.active {
+    box-shadow: none;
+    background: #e0e0e0;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    transform: translateY(0)
+}
+.container_canvas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container_buttons{
+    display: flex;
+    background: #120435;
+    height: 150px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.container_rotar {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container_resto{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
