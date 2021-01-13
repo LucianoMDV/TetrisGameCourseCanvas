@@ -222,8 +222,8 @@ function guardarDatos(valor) {
   console.log("guardo datos: " + valor);
 
   let score = document.querySelector("#score");
-  debugger;
-  score.children[0].innerHTML = cargarDatos();
+  // debugger;
+  score.children[1].innerHTML = cargarDatos();
 }
 function cargarDatos() {
   // debugger;
