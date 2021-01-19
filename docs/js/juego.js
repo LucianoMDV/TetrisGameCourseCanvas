@@ -44,13 +44,13 @@ window.onload = function () {
     const figuraS = new FiguraS();
 
     let fichaGrafico = [
-      cubo.getForma,
-      rectangulo.getForma,
-      figuraL.getForma,
-      figuraL2.getForma,
-      figuraS2.getForma,
-      figuraT.getForma,
-      figuraS.getForma,
+      cubo.forma,
+      rectangulo.forma,
+      figuraL.forma,
+      figuraL2.forma,
+      figuraS2.forma,
+      figuraT.forma,
+      figuraS.forma,
     ];
 
     pieza = new Pieza(fichaGrafico, ctx, tablero);

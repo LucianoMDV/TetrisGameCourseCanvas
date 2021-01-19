@@ -1,6 +1,6 @@
-class Pieza extends Color {
+class Pieza {
   constructor(fichaGrafico, ctx, tablero) {
-    super();
+    this.colors = new Color().colors;
     this.fichaGrafico = fichaGrafico;
     this.ctx = ctx;
     this.tablero = tablero;
@@ -26,7 +26,7 @@ class Pieza extends Color {
     let pierde = false;
     let tableroCopy;
 
-    let anchoTablero = this.tablero.getColumna;
+    let anchoTablero = this.tablero.columna;
 
     for (let px = 1; px < anchoTablero - 1; px++) {
       tableroCopy = this.tablero.getTablero();
@@ -44,8 +44,8 @@ class Pieza extends Color {
     let filaCompleta;
     let tableroCopy;
 
-    let altoTablero = this.tablero.getFila;
-    let anchoTablero = this.tablero.getColumna;
+    let altoTablero = this.tablero.fila;
+    let anchoTablero = this.tablero.columna;
 
     let sumarPuntos = false;
     let puntosDeLinea = cargarDatos();
@@ -60,9 +60,7 @@ class Pieza extends Color {
         }
       }
       if (filaCompleta == true) {
-        // debugger;
         for (let px = 1; px < anchoTablero - 1; px++) {
-          // debugger;
 
           puntosDeLinea += tableroCopy[py][px];
           tableroCopy[py][px] = 0;
@@ -217,16 +215,13 @@ class Pieza extends Color {
 }
 
 function guardarDatos(valor) {
-  // debugger;
   localStorage.setItem("nombre_jugador", valor);
   console.log("guardo datos: " + valor);
 
   let score = document.querySelector("#score");
-  // debugger;
   score.children[1].innerHTML = cargarDatos();
 }
 function cargarDatos() {
-  // debugger;
   let valor = parseInt(localStorage.getItem("nombre_jugador"));
   return valor;
 }
